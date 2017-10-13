@@ -1,4 +1,6 @@
 import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import LiveReloadPlugin from 'webpack-livereload-plugin';
 
 export default {
   debug: true,
@@ -13,7 +15,14 @@ export default {
     publicPath: '/',
     filename: 'bundle.js'
   },
-  plugins: [],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      inject: true,
+      liveReload: true
+    }),
+    new LiveReloadPlugin()
+  ],
   module: {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loaders: ['babel'] },

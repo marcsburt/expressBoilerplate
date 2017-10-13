@@ -12,7 +12,11 @@
     "localtunnel": "lt --port 3000 --subdomain burt",
     "share": "npm-run-all --parallel open:src localtunnel",
     "test": "mocha --reporter progress buildScripts/testSetup.js \"src/**/*.test.js\"",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "clean-dist": "rimraf ./dist && mkdir dist",
+    "prebuild": "npm-run-all clean-dist test lint",
+    "build": "babel-node buildScripts/build.js",
+    "postbuild": "babel-node buildScripts/distServer.js"
   },
   "author": "Cory House",
   "license": "MIT",
@@ -53,6 +57,7 @@
     "webpack": "1.13.2",
     "webpack-dev-middleware": "1.8.4",
     "webpack-hot-middleware": "2.13.0",
+    "webpack-livereload-plugin": "^1.0.0",
     "webpack-md5-hash": "0.0.5"
   }
 }
