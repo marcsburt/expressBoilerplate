@@ -1,5 +1,4 @@
 import express from 'express';
-import path from 'path';
 import webpack from 'webpack';
 import config from '../webpack.config.dev';
 
@@ -15,7 +14,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../src/index.html'))
+  console.log('res', res);
 });
 
 

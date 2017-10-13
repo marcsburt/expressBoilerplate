@@ -7,7 +7,7 @@ export default {
   devtool: 'inline-source-map',
   noInfo: false,
   entry: [
-    path.resolve(__dirname, 'src/index')
+    path.resolve(__dirname, 'src/app')
   ],
   target: 'web',
   output: {
@@ -16,6 +16,7 @@ export default {
     filename: 'bundle.js'
   },
   plugins: [
+    //
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       inject: true,
@@ -26,7 +27,6 @@ export default {
   module: {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loaders: ['babel'] },
-      { test: /\.css$/, loaders: ['style', 'css'] }
     ]
   }
 }
