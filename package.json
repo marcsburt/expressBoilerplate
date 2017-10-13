@@ -5,7 +5,7 @@
   "scripts": {
     "prestart": "babel-node buildScripts/startMessage.js",
     "start": "npm-run-all --parallel security-check open:src lint:watch test:watch",
-    "open:src": "babel-node buildScripts/srcServer.js",
+    "open:src": "nodemon buildScripts/srcServer.js  --exec babel-node --presets es2015",
     "lint": "esw webpack.config.* src buildScripts --color",
     "lint:watch": "npm run lint -- --watch",
     "security-check": "nsp check",
@@ -21,6 +21,8 @@
   "author": "Cory House",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "mongoose": "^4.12.1",
     "whatwg-fetch": "1.0.0"
   },
   "devDependencies": {
