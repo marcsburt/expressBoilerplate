@@ -1,4 +1,4 @@
-import appConfig from './local.env';
+import appConfig from './config/config';
 import express from 'express';
 import webpack from 'webpack';
 import config from '../webpack.config.dev';
@@ -9,16 +9,16 @@ import routes from './api';
 import cors from 'cors';
 import helmet from 'helmet';
 
-// import http from 'http';
-
 /* eslint-disable no-console */
 
 const port = appConfig.port;
+const mongoHost = appConfig.mongo.host
 const app = express();
 const compiler = webpack(config);
+
 mongoose.set('debug', true);
 mongoose.Promise = require('bluebird');
-mongoose.connect(appConfig.dbUri, {
+mongoose.connect(mongoHost, {
   useMongoClient: true,
 });
 

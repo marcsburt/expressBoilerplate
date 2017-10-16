@@ -4,7 +4,7 @@
   "description": "Express Boilerplate",
   "scripts": {
     "start": "npm-run-all --parallel security-check open:src lint:watch",
-    "open:src": "NODE_ENV=development nodemon ./src/app.js  --exec babel-node --presets es2015",
+    "open:src": "nodemon ./src/app.js  --exec babel-node --presets es2015",
     "lint": "esw webpack.config.* src buildScripts --color",
     "lint:watch": "npm run lint -- --watch",
     "security-check": "nsp check",
@@ -21,7 +21,9 @@
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
     "helmet": "^3.9.0",
+    "joi": "^13.0.0",
     "json-loader": "^0.5.7",
     "mongoose": "^4.12.1",
     "whatwg-fetch": "1.0.0"
