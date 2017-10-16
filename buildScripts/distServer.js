@@ -2,7 +2,7 @@ import express from 'express';
 import compression from 'compression';
 import chalk from 'chalk';
 import mongoose from 'mongoose';
-import appConfig from '../src/config';
+import appConfig from '../src/local.env';
 
 /* eslint-disable no-console */
 process.env.NODE_ENV = 'production';

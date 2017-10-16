@@ -1,4 +1,4 @@
-import appConfig from '../src/config';
+import appConfig from '../src/local.env';
 import express from 'express';
 import webpack from 'webpack';
 import config from '../webpack.config.dev';
@@ -14,6 +14,7 @@ const port = 3000;
 const app = express();
 const compiler = webpack(config);
 mongoose.connect(appConfig.dbUri);
+require('../src/routes').default(app);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
