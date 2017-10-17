@@ -1,4 +1,4 @@
-// import mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import supertest from 'supertest';
 import app from '../../app';
 import httpStatus from 'http-status';
@@ -8,19 +8,15 @@ chai.config.includeStack = true;
 
 const request = supertest.agent(app.listen());
 
-// after((done) => {
-//   mongoose.models = {};
-//   mongoose.modelSchemas = {};
-//   mongoose.connection.close();
-//   done();
-// })
+after((done) => {
+  mongoose.models = {};
+  mongoose.modelSchemas = {};
+  mongoose.connection.close();
+  done();
+})
 
 
 describe('# Example API', () => {
-  // after((done) => {
-  //   server.close();
-  //   done();
-  // })
 
   let user = {
     username: 'TEST123',

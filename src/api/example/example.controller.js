@@ -1,10 +1,21 @@
 import Example from './example.model';
-const index = (req, res) => {
-  Example
-    .find({})
-    .exec()
-    .then(data => res.json(data))
-    .catch(e => res.json(e));
+
+
+function index(req, res, next) {
+  Example.list()
+    .then((data) => {
+      res.json(data);
+    })
+    .catch(e => next(e));
+}
+
+const findOne = (req, res, next) => {
+  let name = req.params.name
+  Example.getOne({ username: name })
+    .then(data => {
+      res.json(data)
+    })
+    .catch(e => next(e));
 }
 
 const create = (req, res) => {
@@ -12,14 +23,13 @@ const create = (req, res) => {
     username: req.body.username,
     number: req.body.number
   });
-  example.save((res) => {
-    console.log(res);
-  })
+  example.save()
     .then(savedExample => res.json(savedExample))
     .catch(e => res.json(e));
 }
 
 export default {
   index: index,
-  create: create
+  create: create,
+  findOne: findOne
 }
