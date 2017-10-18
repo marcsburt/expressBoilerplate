@@ -22,6 +22,4 @@ const logger = new winston.Logger({
   transports
 })
 
-
-
 export default logger;
