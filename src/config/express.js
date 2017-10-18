@@ -51,6 +51,10 @@ if (currentEnv === 'development') {
 
 app.use('/api', routes);
 
+// log error in winston transports
+app.use(expressWinston.errorLogger({
+  winstonInstance
+}));
 
 app.use((err, req, res, next) => {
   if (err instanceof expressValidation.ValidationError) {
@@ -70,18 +74,17 @@ app.use((req, res, next) => {
   return next(err);
 });
 
-// log error in winston transports
-app.use(expressWinston.errorLogger({
-  winstonInstance
-}));
+
 
 // error handler, send stacktrace only during development
-app.use((err, req, res, next) => // eslint-disable-line no-unused-vars
-  res.status(err.status).json({
-    message: err.isPublic ? err.message : httpStatus[err.status],
-    stack: config.env === 'development' ? err.stack : {}
-  })
-);
+if (currentEnv === 'development') {
+  app.use((err, req, res, next) => // eslint-disable-line no-unused-vars
+    res.status(err.status).json({
+      message: err.isPublic ? err.message : httpStatus[err.status],
+      stack: config.env === 'development' ? err.stack : {}
+    })
+  );
+}
 
 
 

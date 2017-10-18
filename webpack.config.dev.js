@@ -8,9 +8,6 @@ export default {
   browser: {
     vertex: false
   },
-  // node: {
-  //   fs: 'empty'
-  // },
   entry: [
     path.resolve(__dirname, 'src/app')
   ],

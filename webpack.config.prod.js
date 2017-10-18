@@ -30,7 +30,8 @@ export default {
     }),
     new webpack.optimize.DedupePlugin(), // Eliminate duplicate packages when generating bundle
     new webpack.optimize.UglifyJsPlugin(), // Minify JS
-
+    new webpack.IgnorePlugin(/vertx/), // Ignore vertx
+    new webpack.IgnorePlugin(/fsevents/) // Ignore fsevents
   ],
   module: {
     loaders: [
