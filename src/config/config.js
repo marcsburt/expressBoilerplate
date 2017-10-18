@@ -1,4 +1,7 @@
+/* eslint-disable no-console */
+
 import Joi from 'joi';
+import chalk from 'chalk';
 
 // load and configure dotenv.
 // load vars in .env in proccess.env
@@ -23,7 +26,9 @@ const envVarsSchema = Joi.object({
 // check env vars
 const { error, value: envVars } = Joi.validate(process.env, envVarsSchema);
 if (error) {
-  throw new Error(`Config validation error ${error.message}`);
+  throw new Error(chalk.red(`Config validation error ${error.message}`));
+} else {
+  console.log(chalk.green('Config validation succeeded'))
 }
 
 // make config for app to consume
