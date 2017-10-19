@@ -15,7 +15,7 @@ mongoose.connect(mongoUri, {
   useMongoClient: true,
 });
 
-
+// !module.parent to make tests work in watch mode.
 if (!module.parent) {
   app.listen(port, (err) => {
     if (err) {

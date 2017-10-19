@@ -9,7 +9,7 @@ services:
       - '.:/app'
       # Just specify a path and let the Engine create a volume.
       # Data present in the base image at the specified mount point will be copied
-      # over to the new volume upon volume initialization.
+      # over to thse new volume upon volume initialization.
       # node_modules from this new volume will be used and not from your local dev env.
       - /app/node_modules/
     # Expose ports [HOST:CONTAINER}
@@ -18,3 +18,9 @@ services:
     # Set environment variables from this file
     env_file:
       - .env
+  mongo:
+    image: mongo
+    volumes:
+      - /data/db:/data/db
+    ports:
+      - '27017:27017'

@@ -1,6 +1,3 @@
-version: '2.1'
-# Use for production
-
 version: '2'
 services:
   express-rest-api:
@@ -21,7 +18,3 @@ services:
     # Set environment variables from this file
     env_file:
       - prod.env
-networks:
-  default:
-    external:
-      name: 127.0.0.1

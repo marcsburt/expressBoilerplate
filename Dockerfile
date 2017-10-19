@@ -1,5 +1,5 @@
 # take default image of node boron i.e  node 8.x
-FROM node:8.7.0
+FROM mhart/alpine-node:latest
 
 MAINTAINER Marc Burt <marcburt@bu.edu>
 
@@ -9,7 +9,7 @@ RUN mkdir -p /app
 # set /app directory as default working directory
 WORKDIR /app
 
-COPY ["package.json", "/app/"]
+COPY package.json /app
 
 
 RUN npm install
