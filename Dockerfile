@@ -10,14 +10,14 @@ RUN mkdir -p /app
 WORKDIR /app
 
 # add package.json to app and install npm
-COPY package.json /app
+ADD package.json /app
 RUN npm install
 
 # copy all file from current dir to /app in container
-COPY . /app/
+COPY . /app
 
 # Expose ports [HOST:CONTAINER}
 EXPOSE 3000
 
 # cmd to start nodemon service from package.json
-CMD ["npm", "start", "-s"]
+ENTRYPOINT ["npm", "start", "-s"]

@@ -7,13 +7,18 @@ import app from './config/express';
 
 // from config
 const port = config.port;
-const mongoUri = config.mongo.host;
+//build mongoURI from config
+const mongo = config.mongo;
+
+const mongoURI = `mongodb://${mongo.user}:${mongo.pass}@${mongo.ip}:${mongo.port}/${mongo.db}`
 
 // mongoose.set('debug', true);
 mongoose.Promise = require('bluebird'); // use bluebird to return promises from request
-mongoose.connect(mongoUri, {
+mongoose.connect('mongodb://database/mean-docker', {
   useMongoClient: true,
 });
+
+console.log(mongoose);
 
 // !module.parent to make tests work in watch mode.
 if (!module.parent) {

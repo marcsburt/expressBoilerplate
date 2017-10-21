@@ -12,14 +12,20 @@ const envVarsSchema = Joi.object({
   NODE_ENV: Joi.string()
     .allow(['development', 'production', 'test'])
     .default('development'),
-  PORT: Joi.number()
+  NODE_PORT: Joi.number()
     .default(3000),
-  JWT_SECRET: Joi.string().required()
+  JWT_SECRET: Joi.string()
     .description('JWT Secret required to sign'),
-  MONGO_HOST: Joi.string().required()
-    .description('Mongo DB host url'),
-  MONGO_PORT: Joi.number()
-    .default(27017)
+  MONGODB_PORT: Joi.number()
+    .default(27017),
+  MONGODB_USERNAME: Joi.string().required()
+    .description('Mongo DB username'),
+  MONGODB_PASSWORD: Joi.string().required()
+    .description('Mongo DB password'),
+  MONGODB_IP: Joi.string()
+    .default('127.0.0.1'),
+  MONGODB_DBNAME: Joi.string()
+    .default('boilerplate'),
 }).unknown()
   .required();
 
@@ -34,12 +40,16 @@ if (error) {
 // make config for app to consume
 const config = {
   env: envVars.NODE_ENV,
-  port: envVars.PORT,
-  mongooseDebug: envVars.MONGOOSE_DEBUG,
+  port: envVars.NODE_PORT,
+  // mongooseDebug: envVars.MONGOOSE_DEBUG,
   jwtSecret: envVars.JWT_SECRET,
   mongo: {
-    host: envVars.MONGO_HOST,
-    port: envVars.MONGO_PORT
+    user: envVars.MONGODB_USERNAME,
+    pass: envVars.MONGODB_PASSWORD,
+    port: envVars.MONGODB_PORT,
+    db: envVars.MONGODB_DBNAME,
+    role: envVars.MONGODB_ROLE,
+    ip: envVars.MONGODB_IP,
   }
 };
 

@@ -4,7 +4,7 @@
   "description": "Express Boilerplate",
   "scripts": {
     "prestart": "NODE_ENV=test npm run test",
-    "start": "npm-run-all --parallel security-check open:src lint:watch",
+    "start": "npm-run-all --parallel open:src lint:watch",
     "open:src": "nodemon ./src/app.js  --exec babel-node --presets es2015",
     "lint": "esw webpack.config.* src buildScripts --color",
     "lint:watch": "npm run lint -- --watch",
