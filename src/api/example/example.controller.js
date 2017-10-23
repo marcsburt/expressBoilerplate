@@ -18,18 +18,28 @@ const findOne = (req, res, next) => {
     .catch(e => next(e));
 }
 
-const create = (req, res) => {
+const create = (req, res, next) => {
   const example = new Example({
     username: req.body.username,
     number: req.body.number
   });
   example.save()
     .then(savedExample => res.json(savedExample))
-    .catch(e => res.json(e));
+    .catch(e => next(e));
+}
+
+const deleteOne = (req, res, next) => {
+  const id = req.params.id
+  Example.remove({ _id: id })
+    .then(data => {
+      res.json(data)
+    })
+    .catch(e => next(e));
 }
 
 export default {
   index: index,
   create: create,
-  findOne: findOne
+  findOne: findOne,
+  deleteOne: deleteOne
 }

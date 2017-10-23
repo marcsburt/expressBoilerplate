@@ -1,16 +1,38 @@
 version: '2'
 
 services:
-  express: #name of the second service
-    build: . # specify the directory of the Dockerfile
-    volumes:  #local env to make database usable
-      - '.:/app'
+  express:
+    build:
+      context: .
+    volumes:
+      # Mounts the project directory on the host to /app inside the container,
+      # allowing you to modify the code without having to rebuild the image.
+      - .:/app
+      # Just specify a path and let the Engine create a volume.
+      # Data present in the base image at the specified mount point will be copied
+      # over to the new volume upon volume initialization.
+      # node_modules from this new volume will be used and not from your local dev env.
       - /app/node_modules/
+
+    # Expose ports [HOST:CONTAINER}
     ports:
-      - "3000:3000" #specify ports forewarding
+      - "3000:3000"
+
+    # Set environment variables from this file
+    env_file:
+      - .env
+
+    # Link to containers in another service.
+    # Links also express dependency between services in the same way as depends_on,
+    # so they determine the order of service startup.
     links:
-      - database #link to database
-  database:
-    image: mongo
+      - mongo
+  mongo:
+    image: "mongo:3.4.2"
+    # Link local instance of MongoDb data to a volume within the container.
+    # This will make data persistance and portable between several containers.
+    volumes:
+      - /data/db:/data/db/
     ports:
       - "27017:27017"
+    command: mongod --auth

@@ -26,6 +26,8 @@ const envVarsSchema = Joi.object({
     .default('127.0.0.1'),
   MONGODB_DBNAME: Joi.string()
     .default('boilerplate'),
+  MONGODB_AUTH_SOURCE: Joi.string()
+    .default('admin'),
 }).unknown()
   .required();
 
@@ -50,6 +52,7 @@ const config = {
     db: envVars.MONGODB_DBNAME,
     role: envVars.MONGODB_ROLE,
     ip: envVars.MONGODB_IP,
+    authSource: envVars.MONGODB_AUTH_SOURCE
   }
 };
 

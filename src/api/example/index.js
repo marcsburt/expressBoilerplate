@@ -10,5 +10,8 @@ router.route('/')
 router.route('/:name')
   .get(exampleCtrl.findOne);
 
+router.route('/:id')
+  .delete(exampleCtrl.deleteOne);
+
 
 export default router;

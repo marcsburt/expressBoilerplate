@@ -10,15 +10,13 @@ const port = config.port;
 //build mongoURI from config
 const mongo = config.mongo;
 
-const mongoURI = `mongodb://${mongo.user}:${mongo.pass}@${mongo.ip}:${mongo.port}/${mongo.db}`
+const mongoDocker = `mongodb://${mongo.user}:${mongo.pass}@${mongo.ip}:${mongo.port}/${mongo.db}?authSource=${mongo.authSource}`
 
 // mongoose.set('debug', true);
 mongoose.Promise = require('bluebird'); // use bluebird to return promises from request
-mongoose.connect('mongodb://database/mean-docker', {
+mongoose.connect(mongoDocker, {
   useMongoClient: true,
 });
-
-console.log(mongoose);
 
 // !module.parent to make tests work in watch mode.
 if (!module.parent) {
@@ -26,7 +24,7 @@ if (!module.parent) {
     if (err) {
       console.log(err);
     } else {
-      console.info(`server started on port ${config.port} (${config.env})`)
+      console.info(`server started on port ${port} (${config.env})`)
     }
   });
 }

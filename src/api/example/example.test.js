@@ -23,6 +23,8 @@ describe('# Example API', () => {
     number: 12345
   };
 
+  let resUser = {};
+
   describe('# POST /api/examples', () => {
     it('should create a new example', (done) => {
       request
@@ -32,7 +34,7 @@ describe('# Example API', () => {
         .then((res) => {
           expect(res.body.username).to.equal(user.username);
           expect(res.body.number).to.equal(user.number);
-          user = res.body;
+          resUser = res.body;
         })
       done();
 
@@ -45,7 +47,21 @@ describe('# Example API', () => {
         .get('/api/examples')
         .expect(httpStatus.OK)
         .then((res) => {
+          expect(res.body).to.be.an('array');
+        })
+      done();
+    })
+  })
+
+  describe('# DELETE /api/examples/:id', () => {
+    it('should delete what was posted earlier in the test', (done) => {
+      request
+        .delete(`/api/examples/${resUser._id}`)
+        .expect(httpStatus.OK)
+        .then((res) => {
           expect(res.body).to.be.an('object');
+          expect(res.status).to.equal(200);
+          expect(res.body).to.have.property('ok').eql(1);
         })
       done();
     })
