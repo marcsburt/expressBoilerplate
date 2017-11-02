@@ -1,3 +1,5 @@
 node_modules
 .docker
-.package*
+.package.json
+.package-lock.json
+.gitignore
