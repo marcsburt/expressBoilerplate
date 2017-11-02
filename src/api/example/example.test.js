@@ -19,7 +19,7 @@ after((done) => {
 describe('# Example API', () => {
 
   let user = {
-    username: 'TEST123',
+    username: 'Test',
     number: 12345
   };
 
