@@ -38,7 +38,7 @@
     "json-loader": "^0.5.7",
     "method-override": "^2.3.10",
     "mime": "^2.0.3",
-    "mongoose": "^4.12.4",
+    "mongoose": "^4.12.6",
     "morgan": "^1.9.0",
     "request": "^2.83.0",
     "whatwg-fetch": "1.0.0",
